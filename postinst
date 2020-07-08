@@ -1,0 +1,38 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+if [[ $1 = "configure" && -z $2 ]]; then
+  echo "Installing additional components for TermDE..."
+  curl -#L "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Retina/complete/Fira%20Code%20Retina%20Nerd%20Font%20Complete%20Mono.ttf" \
+    -o ${HOME}/.fonts/FiraCodeRetinaNerdFontMono.ttf --create-dirs
+  install -D ${HOME}/.fonts/FiraCodeRetinaNerdFontMono.ttf ${HOME}/.termux/font.ttf
+  curl -#L "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" \
+    -o ${HOME}/.config/nvim/autoload/plug.vim --create-dirs
+  nvim -c ":PlugInstall" <(cat <<- '"""'
+Note: Currently installing Neovim plugins.
+      Press `CTRL+ALT+Q` to exit manually.
+"""
+)
+  nvim -c ":CocInstall coc-highlight coc-git coc-json" <(cat <<- '"""'
+Note: Currently installing Conquer of Completion extensions.
+      Press `CTRL+ALT+Q` to exit manually.
+"""
+)
+  export ZSH="${HOME}/.oh-my-zsh"
+  sh -c "$(curl -#L "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh")" \
+    "" --unattended
+  sed -i 's/^ZSH_THEME=.*/ZSH_THEME="agnoster"/' ${HOME}/.zshrc
+  chsh -s zsh
+  echo "Note: Restart Termux or open a new session to see changes."
+else
+  nvim -c ":PlugUpgrade|:PlugUpdate" <(cat <<- '"""'
+Note: Currently upgrading Neovim plugins.
+      Press `CTRL+ALT+Q` to exit manually.
+"""
+)
+  nvim -c ":CocUpdate" <(cat <<- '"""'
+Note: Currently upgrading Conquer of Completion extensions.
+      Press `CTRL+ALT+Q` to exit manually.
+"""
+)
+  bash ${ZSH}/tools/upgrade.sh
+fi

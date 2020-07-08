@@ -1,0 +1,19 @@
+{
+  "name": "termde",
+  "version": "0.1",
+  "arch": "all",
+  "maintainer": "Meiuwa",
+  "description": "Turn Termux into a development environment",
+  "homepage": "https://github.com/meiuwa/termde#readme",
+  "depends": [
+    "git",
+    "neovim",
+    "nodejs",
+    "termux-api",
+    "zsh"
+  ],
+  "files": {
+    ".config": ".config",
+    ".termux": ".termux"
+  }
+}
