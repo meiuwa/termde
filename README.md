@@ -6,23 +6,13 @@
 
 Provides minimal configurations for [Termux](https://termux.com) to function as a development environment.
 
-![demo](media/termde_demo.gif)
-
-## Features
+ Features
 
 - Using [Neovim](https://github.com/neovim/neovim) as source code editor.
 - IntelliSense code-completion using [coc.nvim](https://github.com/neoclide/coc.nvim).
 - Shows Git status and diffs in realtime using [coc-git](https://github.com/neoclide/coc-git).
 - Preview Markdown files with [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim).
 - Supports common editor keyboard shortcuts.
-
-> **Note:** IntelliSense requires additional extensions/plugins and manual configurations.
-> For HTML, CSS, and Typescript/Javascript as shown in the demo, simply install
-> [coc-html](https://github.com/neoclide/coc-html), [coc-css](https://github.com/neoclide/coc-css), and [coc-tsserver](https://github.com/neoclide/coc-tsserver):
->
-> ```
-> :CocInstall coc-html coc-css coc-tsserver
-> ```
 
 ## Requirements
 
@@ -33,13 +23,11 @@ The only requirement is [Termux:API](https://wiki.termux.com/wiki/Termux:API) to
 Run the following command to install the latest release:
 
 ```bash
-curl -sL "https://git.io/JJsvW" \
+curl -sL "https://api.github.com/repos/meiuwa/termde/releases/latest" \
   | awk '/browser_download_url/ {print $2}' \
   | xargs curl -#LC - -o $TMPDIR/termde-latest.deb \
   && pkg install -y $TMPDIR/termde-latest.deb
 ```
-
-> **Note:** Existing configurations may be overwritten when installing for the first time.
 
 ## Shortcuts
 
